@@ -1,7 +1,12 @@
-import "./App.scss";
+import "./styles/Main.scss";
+import AllTransactions from "./pages/AllTransactions/AllTransactions";
 
 function App() {
-  return <div>hello world</div>;
+  return (
+    <div>
+      <AllTransactions />
+    </div>
+  );
 }
 
 export default App;
