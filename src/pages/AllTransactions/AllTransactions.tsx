@@ -1,29 +1,22 @@
-import "./AllTransactions.scss";
 import React from "react";
 import { useTransactionContext } from "../../context/TransactionContext";
+import AddTransactionForm from "../../components/TransactionForm/TransactionForm";
+import "./AllTransactions.scss";
 
 const AllTransactions: React.FC = () => {
-  const { transactions, balance, addTransaction, removeTransaction } =
-    useTransactionContext();
-
-  const handleAddTransaction = () => {
-    const newTransaction = {
-      id: new Date().toISOString(),
-      description: "New Transaction",
-      amount: 100,
-      date: new Date().toISOString(),
-    };
-    addTransaction(newTransaction);
-  };
+  const { transactions, balance, removeTransaction } = useTransactionContext();
 
   return (
-    <div>
-      <h2>Balance: {balance}</h2>
-      <button onClick={handleAddTransaction}>Add Transaction</button>
-      <ul>
+    <div className="transactions-container">
+      <h2 className="balance">Balance: {balance}</h2>
+      <div className="add-transaction-form">
+        <AddTransactionForm />
+      </div>
+      <ul className="transactions-list">
         {transactions.map((transaction) => (
           <li key={transaction.id}>
-            {transaction.description} - {transaction.amount}
+            {transaction.description} - {transaction.amount} -{" "}
+            {transaction.date}
             <button onClick={() => removeTransaction(transaction.id)}>
               Remove
             </button>
