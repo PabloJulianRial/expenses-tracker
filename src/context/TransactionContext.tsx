@@ -52,37 +52,37 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
   const { currentUser } = useAuth();
   const [balance, setBalance] = useState<number>(0);
 
-  //   useEffect(() => {
-  //     if (currentUser) {
-  //       const fetchTransactions = async () => {
-  //         try {
-  //           const q = query(
-  //             collection(db, "transactions"),
-  //             where("userId", "==", currentUser.uid)
-  //           );
-  //           const querySnapshot = await getDocs(q);
-  //           const fetchedTransactions: Transaction[] = [];
-  //           querySnapshot.forEach((doc) => {
-  //             fetchedTransactions.push({
-  //               id: doc.id,
-  //               ...doc.data(),
-  //             } as Transaction);
-  //           });
-  //           setTransactions(fetchedTransactions);
+  useEffect(() => {
+    if (currentUser) {
+      const fetchTransactions = async () => {
+        try {
+          const q = query(
+            collection(db, "transactions"),
+            where("userId", "==", currentUser.uid)
+          );
+          const querySnapshot = await getDocs(q);
+          const fetchedTransactions: Transaction[] = [];
+          querySnapshot.forEach((doc) => {
+            fetchedTransactions.push({
+              id: doc.id,
+              ...doc.data(),
+            } as Transaction);
+          });
+          setTransactions(fetchedTransactions);
 
-  //           const calculatedBalance = fetchedTransactions.reduce(
-  //             (acc, transaction) => acc + transaction.amount,
-  //             0
-  //           );
-  //           setBalance(calculatedBalance);
-  //         } catch (error) {
-  //           console.error("Error fetching transactions: ", error);
-  //         }
-  //       };
+          const calculatedBalance = fetchedTransactions.reduce(
+            (acc, transaction) => acc + transaction.amount,
+            0
+          );
+          setBalance(calculatedBalance);
+        } catch (error) {
+          console.error("Error fetching transactions: ", error);
+        }
+      };
 
-  //       fetchTransactions();
-  //     }
-  //   }, [currentUser]);
+      fetchTransactions();
+    }
+  }, [currentUser]);
 
   const addTransaction = async (transaction: Omit<Transaction, "id">) => {
     if (currentUser) {
