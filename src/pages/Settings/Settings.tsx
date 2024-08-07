@@ -1,15 +1,14 @@
-import "./Analytics.scss";
-
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import "./Settings.scss";
 
-const Analytics: React.FC = () => {
+const Settings: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <h1>Analytics</h1>
+      <h1>Settings</h1>
     </div>
   );
 };
 
-export default Analytics;
+export default Settings;

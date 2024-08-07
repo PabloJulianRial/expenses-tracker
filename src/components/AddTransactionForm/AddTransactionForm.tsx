@@ -1,31 +1,35 @@
+// src/components/AddTransactionForm/AddTransactionForm.tsx
+
 import React, { useState } from "react";
 import { useTransactionContext } from "../../context/TransactionContext";
-import { Transaction } from "../../types";
 
 const AddTransactionForm: React.FC = () => {
-  const { addTransaction } = useTransactionContext();
+  const { addTransaction } = useTransactionContext(); // Get the addTransaction function from context
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState<number | "">(""); // Can be empty or a number
+  const [date, setDate] = useState("");
 
-  const [description, setDescription] = useState<string>("");
-  const [amount, setAmount] = useState<number>(0);
-  const [date, setDate] = useState<string>(
-    new Date().toISOString().split("T")[0]
-  );
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (amount === "" || !description || !date) {
+      console.error("Please fill out all fields"); // Simple form validation
+      return;
+    }
 
-    const newTransaction: Transaction = {
-      id: new Date().toISOString(),
-      description,
-      amount,
-      date,
-    };
-
-    addTransaction(newTransaction);
-
-    setDescription("");
-    setAmount(0);
-    setDate(new Date().toISOString().split("T")[0]);
+    // Call the addTransaction function from the context
+    try {
+      await addTransaction({
+        description,
+        amount: Number(amount),
+        date,
+      });
+      // Clear the form fields after submitting
+      setDescription("");
+      setAmount("");
+      setDate("");
+    } catch (error) {
+      console.error("Error adding transaction:", error);
+    }
   };
 
   return (
