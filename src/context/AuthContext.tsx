@@ -40,11 +40,13 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-  const register = (email: string, password: string) => {
+  const register = async (email: string, password: string) => {
+    console.log("Registering user:", email);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const login = (email: string, password: string) => {
+  const login = async (email: string, password: string) => {
+    console.log("Logging in user:", email);
     return signInWithEmailAndPassword(auth, email, password);
   };
 

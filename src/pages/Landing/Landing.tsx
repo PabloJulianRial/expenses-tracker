@@ -1,13 +1,25 @@
 import React, { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import "./Landing.scss";
 
 const Landing: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Username:", username, "Password:", password);
+    setError(null);
+    try {
+      await login(email, password);
+      navigate("/transactions");
+    } catch (error) {
+      setError("Failed to log in");
+      console.error("Login error:", error);
+    }
   };
 
   return (
@@ -15,12 +27,12 @@ const Landing: React.FC = () => {
       <h1 className="landing-header">Expense Tracker</h1>
       <form className="signin-form" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username or E-mail:</label>
+          <label htmlFor="email">Email:</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -34,6 +46,7 @@ const Landing: React.FC = () => {
             required
           />
         </div>
+        {error && <p className="error">{error}</p>}
         <button type="submit">Sign In</button>
       </form>
       <div className="register-link">

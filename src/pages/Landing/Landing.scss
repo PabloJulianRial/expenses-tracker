@@ -5,6 +5,12 @@ $color-dark: #63458a;
 $color-white: #fff7fc;
 $color-black: #0a070d;
 
+.error {
+  color: red;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
 .landing-container {
   background-color: $color-white;
   padding: 40px 20px;
