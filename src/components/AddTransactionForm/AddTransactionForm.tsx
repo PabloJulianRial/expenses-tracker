@@ -21,6 +21,7 @@ const AddTransactionForm: React.FC = () => {
         date,
       });
 
+      // Clear form after submission
       setDescription("");
       setAmount("");
       setDate("");

@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import { useAuth } from "./AuthContext";
 
 interface Transaction {
@@ -36,29 +42,96 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
   const { currentUser } = useAuth();
   const [balance, setBalance] = useState<number>(0);
 
-  const addTransaction = (transaction: Omit<Transaction, "id">) => {
-    if (currentUser) {
-      const newTransaction = {
-        ...transaction,
-        id: new Date().getTime().toString(),
-      };
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      if (!currentUser) return;
+
+      try {
+        const response = await fetch("http://localhost:5000/api/transactions", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${await currentUser.getIdToken()}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch transactions");
+        }
+
+        const data = await response.json();
+        setTransactions(data);
+
+        const calculatedBalance = data.reduce(
+          (acc: number, transaction: Transaction) => acc + transaction.amount,
+          0
+        );
+        setBalance(calculatedBalance);
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+      }
+    };
+
+    fetchTransactions();
+  }, [currentUser]);
+
+  const addTransaction = async (transaction: Omit<Transaction, "id">) => {
+    if (!currentUser) return;
+
+    try {
+      const response = await fetch("http://localhost:5000/api/transactions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${await currentUser.getIdToken()}`,
+        },
+        body: JSON.stringify(transaction),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add transaction");
+      }
+
+      const newTransaction = await response.json();
       setTransactions((prevTransactions) => [
         ...prevTransactions,
         newTransaction,
       ]);
       setBalance((prevBalance) => prevBalance + transaction.amount);
-    } else {
-      console.error("No current user, cannot add transaction");
+    } catch (error) {
+      console.error("Error adding transaction:", error);
     }
   };
 
-  const removeTransaction = (id: string) => {
-    const transactionToRemove = transactions.find((t) => t.id === id);
-    if (transactionToRemove) {
+  const removeTransaction = async (id: string) => {
+    if (!currentUser) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/transactions/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${await currentUser.getIdToken()}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to remove transaction");
+      }
+
       setTransactions((prevTransactions) =>
         prevTransactions.filter((transaction) => transaction.id !== id)
       );
-      setBalance((prevBalance) => prevBalance - transactionToRemove.amount);
+
+      const removedTransaction = transactions.find(
+        (transaction) => transaction.id === id
+      );
+      if (removedTransaction) {
+        setBalance((prevBalance) => prevBalance - removedTransaction.amount);
+      }
+    } catch (error) {
+      console.error("Error removing transaction:", error);
     }
   };
 

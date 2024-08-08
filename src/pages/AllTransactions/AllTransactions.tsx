@@ -12,6 +12,7 @@ const AllTransactions: React.FC = () => {
       <Navbar />
       <div className="transactions-container">
         <h2 className="balance">Balance: {balance}</h2>
+        {/* Add the transaction form */}
         <div className="add-transaction-form">
           <AddTransactionForm />
         </div>
