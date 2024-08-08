@@ -6,7 +6,6 @@ import React, {
   ReactNode,
 } from "react";
 import { auth } from "../firebaseconfig";
-
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -47,7 +46,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string) => {
     console.log("Logging in user:", email);
-    return signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    console.log("User logged in:", userCredential.user); // Log the user details
+    return userCredential;
   };
 
   const logout = () => {
@@ -56,6 +61,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("Auth state changed, user:", user); // Log user info when auth state changes
       setCurrentUser(user);
     });
 
