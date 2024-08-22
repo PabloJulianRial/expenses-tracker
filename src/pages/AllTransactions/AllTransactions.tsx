@@ -18,10 +18,10 @@ const AllTransactions: React.FC = () => {
         </div>
         <ul className="transactions-list">
           {transactions.map((transaction) => (
-            <li key={transaction.id}>
+            <li key={transaction._id}>
               {transaction.description} - {transaction.amount} -{" "}
               {transaction.date}
-              <button onClick={() => removeTransaction(transaction.id)}>
+              <button onClick={() => removeTransaction(transaction._id)}>
                 Remove
               </button>
             </li>

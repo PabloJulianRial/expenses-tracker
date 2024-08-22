@@ -21,13 +21,10 @@ const AddTransactionForm: React.FC = () => {
         date,
       });
 
-      // Clear form after submission
       setDescription("");
       setAmount("");
       setDate("");
-    } catch (error) {
-      console.error("Error adding transaction:", error);
-    }
+    } catch (error) {}
   };
 
   return (

@@ -6,20 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import { useAuth } from "./AuthContext";
-
-interface Transaction {
-  id: string;
-  amount: number;
-  description: string;
-  date: string;
-}
-
-interface TransactionContextType {
-  transactions: Transaction[];
-  balance: number;
-  addTransaction: (transaction: Omit<Transaction, "id">) => void;
-  removeTransaction: (id: string) => void;
-}
+import { TransactionContextType, Transaction } from "../types";
 
 const TransactionContext = createContext<TransactionContextType | undefined>(
   undefined
@@ -74,7 +61,7 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
     fetchTransactions();
   }, [currentUser]);
 
-  const addTransaction = async (transaction: Omit<Transaction, "id">) => {
+  const addTransaction = async (transaction: Omit<Transaction, "_id">) => {
     if (!currentUser) return;
 
     try {
@@ -121,11 +108,11 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
       }
 
       setTransactions((prevTransactions) =>
-        prevTransactions.filter((transaction) => transaction.id !== id)
+        prevTransactions.filter((transaction) => transaction._id !== id)
       );
 
       const removedTransaction = transactions.find(
-        (transaction) => transaction.id === id
+        (transaction) => transaction._id === id
       );
       if (removedTransaction) {
         setBalance((prevBalance) => prevBalance - removedTransaction.amount);

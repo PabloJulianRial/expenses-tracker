@@ -1,12 +1,13 @@
 export interface Transaction {
-  id: string;
+  _id: string;
   description: string;
   amount: number;
   date: string;
 }
+
 export interface TransactionContextType {
   transactions: Transaction[];
   balance: number;
-  addTransaction: (transaction: Transaction) => void;
+  addTransaction: (transaction: Omit<Transaction, "_id">) => void;
   removeTransaction: (id: string) => void;
 }
