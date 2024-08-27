@@ -1,37 +1,39 @@
+// src/components/Navbar/Navbar.tsx
+
 import React from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.scss";
 
 const Navbar: React.FC = () => {
-  const { logout } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/");
-    } catch (error) {
-      console.error("Logout failed", error);
-    }
-  };
-
   return (
     <nav className="navbar">
-      <div className="navbar-content">
-        {location.pathname !== "/dashboard" && (
-          <button className="nav-button" onClick={() => navigate("/dashboard")}>
+      <ul className="navbar-list">
+        <li className="navbar-item">
+          <Link to="/dashboard" className="navbar-link">
             Dashboard
-          </button>
-        )}
-        <button className="nav-button" onClick={handleLogout}>
-          Logout
-        </button>
-        <button className="nav-button" onClick={() => navigate("/settings")}>
-          <i className="settings-icon">⚙️</i>
-        </button>
-      </div>
+          </Link>
+        </li>
+        <li className="navbar-item">
+          <Link to="/transactions" className="navbar-link">
+            Transactions
+          </Link>
+        </li>
+        <li className="navbar-item">
+          <Link to="/analytics" className="navbar-link">
+            Analytics
+          </Link>
+        </li>
+        <li className="navbar-item">
+          <Link to="/categories" className="navbar-link">
+            Categories
+          </Link>
+        </li>
+        <li className="navbar-item">
+          <Link to="/settings" className="navbar-link">
+            Settings
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
 };

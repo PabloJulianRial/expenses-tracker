@@ -1,0 +1,64 @@
+.category-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.category-popup {
+  background-color: #fff7fc;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Use a percentage to make it responsive */
+  max-width: 400px;
+  text-align: center;
+  max-height: 80vh; /* Limit height to fit smaller screens */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(100px, 1fr)
+  ); /* Responsive grid */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.category-item {
+  background-color: #b288c0;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #9a48d0;
+  }
+}
+
+.close-button {
+  background-color: #e4b7e5;
+  color: #63458a;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.close-button:hover {
+  background-color: #9a48d0;
+  color: #fff;
+}

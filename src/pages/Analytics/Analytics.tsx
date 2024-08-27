@@ -1,13 +1,108 @@
-import "./Analytics.scss";
-
-import React from "react";
-import Navbar from "../../components/Navbar/Navbar";
+import React, { useEffect, useState } from "react";
+import { Pie, Bar } from "react-chartjs-2";
+import { ChartData } from "chart.js";
+import { useTransactionContext } from "../../context/TransactionContext";
+import "chart.js/auto";
 
 const Analytics: React.FC = () => {
+  const { transactions } = useTransactionContext();
+
+  const [categoryData, setCategoryData] = useState<ChartData<"pie">>({
+    labels: [],
+    datasets: [
+      {
+        label: "Expenses by Category",
+        data: [],
+        backgroundColor: [] as string[],
+      },
+    ],
+  });
+
+  const [monthlyData, setMonthlyData] = useState<ChartData<"bar">>({
+    labels: [],
+    datasets: [
+      {
+        label: "Monthly Expenses",
+        data: [],
+        backgroundColor: "#36A2EB" as string,
+      },
+    ],
+  });
+
+  useEffect(() => {
+    const categories = transactions.reduce(
+      (acc: Record<string, number>, transaction) => {
+        const category = transaction.category;
+        if (!acc[category]) {
+          acc[category] = 0;
+        }
+        acc[category] += transaction.amount;
+        return acc;
+      },
+      {}
+    );
+
+    const months = transactions.reduce(
+      (acc: Record<string, number>, transaction) => {
+        const month = new Date(transaction.date).toLocaleString("default", {
+          month: "long",
+        });
+        if (!acc[month]) {
+          acc[month] = 0;
+        }
+        acc[month] += transaction.amount;
+        return acc;
+      },
+      {}
+    );
+
+    setCategoryData({
+      labels: Object.keys(categories),
+      datasets: [
+        {
+          label: "Expenses by Category",
+          data: Object.values(categories),
+          backgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56",
+            "#4BC0C0",
+            "#9966FF",
+            "#FF9F40",
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56",
+            "#4BC0C0",
+            "#9966FF",
+            "#FF9F40",
+          ],
+        },
+      ],
+    });
+
+    setMonthlyData({
+      labels: Object.keys(months),
+      datasets: [
+        {
+          label: "Monthly Expenses",
+          data: Object.values(months),
+          backgroundColor: "#36A2EB",
+        },
+      ],
+    });
+  }, [transactions]);
+
   return (
-    <div>
-      <Navbar />
-      <h1>Analytics</h1>
+    <div style={{ width: "90%", margin: "0 auto" }}>
+      <h2>Analytics</h2>
+      <div>
+        <h3>Expenses by Category</h3>
+        <Pie data={categoryData} />
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <h3>Monthly Expenses</h3>
+        <Bar data={monthlyData} />
+      </div>
     </div>
   );
 };
