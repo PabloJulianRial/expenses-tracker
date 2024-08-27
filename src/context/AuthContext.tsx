@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       email,
       password
     );
-    console.log("User logged in:", userCredential.user); // Log the user details
+    console.log("User logged in:", userCredential.user);
     return userCredential;
   };
 
@@ -61,7 +61,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log("Auth state changed, user:", user); // Log user info when auth state changes
+      console.log("Auth state changed, user:", user);
       setCurrentUser(user);
     });
 

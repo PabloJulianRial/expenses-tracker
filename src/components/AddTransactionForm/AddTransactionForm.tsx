@@ -1,15 +1,32 @@
 import React, { useState } from "react";
 import { useTransactionContext } from "../../context/TransactionContext";
 
+const categories = [
+  "groceries",
+  "entertainment",
+  "travel",
+  "accommodation",
+  "bills",
+  "finances",
+  "eating out",
+  "expenses",
+  "gifts",
+  "holidays",
+  "shopping",
+  "personal care",
+  "general",
+];
+
 const AddTransactionForm: React.FC = () => {
   const { addTransaction } = useTransactionContext();
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState<number | "">("");
   const [date, setDate] = useState("");
+  const [category, setCategory] = useState(categories[0]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (amount === "" || !description || !date) {
+    if (amount === "" || !description || !date || !category) {
       console.error("Please fill out all fields");
       return;
     }
@@ -19,12 +36,16 @@ const AddTransactionForm: React.FC = () => {
         description,
         amount: Number(amount),
         date,
+        category,
       });
 
       setDescription("");
       setAmount("");
       setDate("");
-    } catch (error) {}
+      setCategory(categories[0]);
+    } catch (error) {
+      console.error("Error adding transaction:", error);
+    }
   };
 
   return (
@@ -55,6 +76,20 @@ const AddTransactionForm: React.FC = () => {
           onChange={(e) => setDate(e.target.value)}
           required
         />
+      </div>
+      <div>
+        <label>Category:</label>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
       </div>
       <button type="submit">Add Transaction</button>
     </form>

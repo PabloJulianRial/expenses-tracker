@@ -42,7 +42,7 @@ $color-black: #0a070d;
   }
 
   input {
-    width: 100%;
+    width: 94%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid $color-primary;
@@ -80,14 +80,15 @@ $color-black: #0a070d;
   li {
     background-color: $color-primary;
     color: $color-white;
-    padding: 15px;
+    padding: 10px;
     border-radius: 8px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 0.75rem;
 
-    button {
+    .remove-button {
       background-color: transparent;
       border: none;
       color: $color-light;
