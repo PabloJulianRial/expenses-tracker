@@ -1,5 +1,3 @@
-// src/components/Navbar/Navbar.tsx
-
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
@@ -24,9 +22,9 @@ const Navbar: React.FC = () => {
           </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/categories" className="navbar-link">
-            Categories
-          </Link>
+          <Link to="/summary" className="navbar-link">
+            Summary
+          </Link>{" "}
         </li>
         <li className="navbar-item">
           <Link to="/settings" className="navbar-link">

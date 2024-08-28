@@ -1,0 +1,39 @@
+// src/pages/Summary/Summary.scss
+
+.summary-container {
+  padding: 15px;
+}
+
+.category-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.category-sum-item {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #fff7fc;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.category-sum-item a {
+  text-decoration: none;
+  color: #63458a;
+  font-weight: bold;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-name {
+  font-size: 1.1rem;
+}
+
+.category-total {
+  font-size: 1rem;
+  color: #9a48d0;
+}

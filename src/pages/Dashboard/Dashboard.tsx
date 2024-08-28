@@ -1,5 +1,3 @@
-// src/pages/Dashboard/Dashboard.tsx
-
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Dashboard.scss";
@@ -11,25 +9,23 @@ const Dashboard: React.FC = () => {
       <Navbar />
       <div className="dashboard-content">
         <h1>Dashboard</h1>
-        <div className="dashboard-links">
-          <ul>
-            <li>
-              <Link to="/transactions" className="dashboard-link">
-                View Transactions
-              </Link>
-            </li>
-            <li>
-              <Link to="/analytics" className="dashboard-link">
-                View Analytics
-              </Link>
-            </li>
-            <li>
-              <Link to="/categories" className="dashboard-link">
-                Manage Categories
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <ul>
+          <li>
+            <Link to="/transactions" className="dashboard-link">
+              Transactions
+            </Link>
+          </li>
+          <li>
+            <Link to="/analytics" className="dashboard-link">
+              Analytics
+            </Link>
+          </li>
+          <li>
+            <Link to="/summary" className="dashboard-link">
+              Summary
+            </Link>{" "}
+          </li>
+        </ul>
       </div>
     </div>
   );

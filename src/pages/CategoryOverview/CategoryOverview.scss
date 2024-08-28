@@ -1,0 +1,25 @@
+// src/pages/CategoryOverview/CategoryOverview.scss
+
+.category-overview-container {
+  padding: 15px;
+}
+
+.transaction-cat-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.transaction-cat-item {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #fff7fc;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-item span {
+  font-size: 1rem;
+}

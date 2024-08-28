@@ -24,7 +24,7 @@ const AddTransactionForm: React.FC = () => {
   const { addTransaction } = useTransactionContext();
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState<number | "">("");
-  const [date, setDate] = useState(""); // Date state added
+  const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
   const [showCategoryPopup, setShowCategoryPopup] = useState(false);
 
@@ -36,18 +36,11 @@ const AddTransactionForm: React.FC = () => {
       return;
     }
 
-    console.log("Form data to submit:", {
-      description,
-      amount,
-      date,
-      category,
-    });
-
     try {
       await addTransaction({
         description,
         amount: Number(amount),
-        date, // Include date in the transaction object
+        date,
         category,
       });
 
@@ -78,7 +71,6 @@ const AddTransactionForm: React.FC = () => {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            onBlur={() => setShowCategoryPopup(true)}
             required
           />
         </div>
@@ -96,7 +88,7 @@ const AddTransactionForm: React.FC = () => {
           <input
             type="date"
             value={date}
-            onChange={(e) => setDate(e.target.value)} // Handle date input change
+            onChange={(e) => setDate(e.target.value)}
             required
           />
         </div>
@@ -107,7 +99,7 @@ const AddTransactionForm: React.FC = () => {
               type="text"
               value={category}
               readOnly
-              onClick={handleCategoryChange}
+              onClick={handleCategoryChange} // The popup will only appear when clicking this field
               placeholder="Select a category"
               required
             />
