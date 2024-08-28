@@ -1,10 +1,11 @@
+@import "../../styles/_variables.scss";
 .navbar {
   background-color: #63458a;
   padding: 10px 15px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Ensure navbar takes the full width */
-  margin: 0; /* Remove any margins */
-  position: fixed; /* Fix the position at the top */
+  width: 100%;
+  margin: 0;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -15,7 +16,7 @@
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: space-around; /* Space out the items evenly */
+  justify-content: space-around;
   align-items: center;
 }
 

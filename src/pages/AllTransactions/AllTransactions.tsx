@@ -23,7 +23,6 @@ const AllTransactions: React.FC = () => {
       <div className="transactions-container">
         <h2 className="balance">All Transactions</h2>
 
-        {/* Search Input */}
         <input
           type="text"
           placeholder="Search transactions..."
@@ -32,7 +31,6 @@ const AllTransactions: React.FC = () => {
           className="search-input"
         />
 
-        {/* Toggleable Add Transaction Button */}
         <button
           onClick={toggleFormVisibility}
           className="add-transaction-button"
@@ -40,7 +38,6 @@ const AllTransactions: React.FC = () => {
           {showForm ? "Hide Form" : "Add Transaction"}
         </button>
 
-        {/* Conditionally Render AddTransactionForm */}
         {showForm && (
           <div className="add-transaction-form">
             <AddTransactionForm />

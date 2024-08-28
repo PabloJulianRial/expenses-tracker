@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pie, Bar } from "react-chartjs-2";
 import { ChartData } from "chart.js";
 import { useTransactionContext } from "../../context/TransactionContext";
-import Navbar from "../../components/Navbar/Navbar"; // Ensure Navbar is imported
+import Navbar from "../../components/Navbar/Navbar";
 import "./Analytics.scss";
 import "chart.js/auto";
 

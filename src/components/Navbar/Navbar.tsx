@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/"); // Redirect to the landing page after logging out
+    navigate("/");
   };
 
   return (

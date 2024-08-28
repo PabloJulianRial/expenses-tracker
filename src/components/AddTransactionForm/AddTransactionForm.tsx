@@ -99,7 +99,7 @@ const AddTransactionForm: React.FC = () => {
               type="text"
               value={category}
               readOnly
-              onClick={handleCategoryChange} // The popup will only appear when clicking this field
+              onClick={handleCategoryChange}
               placeholder="Select a category"
               required
             />

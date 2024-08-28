@@ -46,7 +46,6 @@ const Settings: React.FC = () => {
       <Navbar />
       <h2>Settings</h2>
 
-      {/* Change Password */}
       <div className="settings-section">
         <h3>Change Password</h3>
         <input
@@ -60,7 +59,6 @@ const Settings: React.FC = () => {
         {passwordSuccess && <p className="success">{passwordSuccess}</p>}
       </div>
 
-      {/* Change Currency */}
       <div className="settings-section">
         <h3>Change Currency</h3>
         <select value={currency} onChange={handleCurrencyChange}>
@@ -68,11 +66,9 @@ const Settings: React.FC = () => {
           <option value="$">USD ($)</option>
           <option value="€">EUR (€)</option>
           <option value="¥">JPY (¥)</option>
-          {/* Add more currencies as needed */}
         </select>
       </div>
 
-      {/* Dark Theme Toggle */}
       <div className="settings-section">
         <h3>Dark Theme</h3>
         <label>
@@ -85,7 +81,6 @@ const Settings: React.FC = () => {
         </label>
       </div>
 
-      {/* Logout */}
       <div className="settings-section">
         <h3>Logout</h3>
         <button onClick={handleLogout}>Log Out</button>

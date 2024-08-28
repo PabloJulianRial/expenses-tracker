@@ -15,7 +15,7 @@ const Landing: React.FC = () => {
     setError(null);
     try {
       const userCredential = await login(email, password);
-      console.log("User logged in:", userCredential.user); // Log user info after login
+      console.log("User logged in:", userCredential.user);
       navigate("/dashboard");
     } catch (error) {
       setError("Failed to log in");

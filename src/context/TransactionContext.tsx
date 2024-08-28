@@ -61,7 +61,9 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
     fetchTransactions();
   }, [currentUser]);
 
-  const addTransaction = async (transaction: Omit<Transaction, "_id">) => {
+  const addTransaction = async (
+    transaction: Omit<Transaction, "_id" | "userId">
+  ) => {
     if (!currentUser) return;
 
     try {
@@ -71,7 +73,10 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
           "Content-Type": "application/json",
           Authorization: `Bearer ${await currentUser.getIdToken()}`,
         },
-        body: JSON.stringify(transaction),
+        body: JSON.stringify({
+          ...transaction,
+          userId: currentUser.uid,
+        }),
       });
 
       if (!response.ok) {
