@@ -4,12 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); /* Darken the background to make the popup stand out */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,8 +12,8 @@
 }
 
 .category-popup {
-  background-color: #fff7fc; /* Ensure this is a different color from the text */
-  color: #63458a; /* Ensure the text color contrasts with the background */
+  background-color: #fff7fc;
+  color: #63458a;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -37,8 +32,8 @@
 }
 
 .category-item {
-  background-color: #b288c0; /* Background color for each category */
-  color: white; /* Text color for the categories */
+  background-color: #b288c0;
+  color: white;
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;

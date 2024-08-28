@@ -1,20 +1,23 @@
 // src/pages/Analytics/Analytics.scss
+@import "./../../styles/variables";
+@import "../../styles/_variables.scss";
 
 .analytics-container {
-  width: 100%;
-  margin: 0 auto;
-  padding: 10px;
+  padding-top: 60px; /* Add padding to account for the fixed navbar */
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: $color-white; /* Ensure it has a contrasting background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 0; /* Ensure it doesn't overlap with the navbar */
 }
 
-.analytics-container h2 {
-  font-size: 1.5rem;
-  text-align: center;
-  margin-bottom: 15px;
-}
-
+.analytics-container h2,
 .analytics-container h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  color: $color-dark;
 }
 
 .chart-container {

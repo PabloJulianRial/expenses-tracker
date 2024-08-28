@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Pie, Bar } from "react-chartjs-2";
 import { ChartData } from "chart.js";
 import { useTransactionContext } from "../../context/TransactionContext";
+import Navbar from "../../components/Navbar/Navbar"; // Ensure Navbar is imported
+import "./Analytics.scss";
 import "chart.js/auto";
 
 const Analytics: React.FC = () => {
@@ -13,7 +15,7 @@ const Analytics: React.FC = () => {
       {
         label: "Expenses by Category",
         data: [],
-        backgroundColor: [] as string[],
+        backgroundColor: [],
       },
     ],
   });
@@ -24,7 +26,7 @@ const Analytics: React.FC = () => {
       {
         label: "Monthly Expenses",
         data: [],
-        backgroundColor: "#36A2EB" as string,
+        backgroundColor: "#36A2EB",
       },
     ],
   });
@@ -69,12 +71,6 @@ const Analytics: React.FC = () => {
             "#4BC0C0",
             "#9966FF",
             "#FF9F40",
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56",
-            "#4BC0C0",
-            "#9966FF",
-            "#FF9F40",
           ],
         },
       ],
@@ -93,7 +89,8 @@ const Analytics: React.FC = () => {
   }, [transactions]);
 
   return (
-    <div style={{ width: "90%", margin: "0 auto" }}>
+    <div className="analytics-container">
+      <Navbar />
       <h2>Analytics</h2>
       <div>
         <h3>Expenses by Category</h3>

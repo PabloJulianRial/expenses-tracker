@@ -1,49 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTransactionContext } from "../../context/TransactionContext";
 import AddTransactionForm from "../../components/AddTransactionForm/AddTransactionForm";
-import "./AllTransactions.scss";
 import Navbar from "../../components/Navbar/Navbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import "./AllTransactions.scss";
 
 const AllTransactions: React.FC = () => {
-  const { transactions, balance, removeTransaction } = useTransactionContext();
+  const { transactions, removeTransaction } = useTransactionContext();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat("en-GB", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }).format(date);
-  };
+  const filteredTransactions = transactions.filter((transaction) =>
+    transaction.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const formatAmount = (amount: number) => {
-    return `£${amount.toFixed(2)}`;
+  const toggleFormVisibility = () => {
+    setShowForm(!showForm);
   };
 
   return (
     <div>
       <Navbar />
       <div className="transactions-container">
-        <h2 className="balance">Balance: {formatAmount(balance)}</h2>
-        <div className="add-transaction-form">
-          <AddTransactionForm />
-        </div>
+        <h2 className="balance">All Transactions</h2>
+
+        {/* Search Input */}
+        <input
+          type="text"
+          placeholder="Search transactions..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+
+        {/* Toggleable Add Transaction Button */}
+        <button
+          onClick={toggleFormVisibility}
+          className="add-transaction-button"
+        >
+          {showForm ? "Hide Form" : "Add Transaction"}
+        </button>
+
+        {/* Conditionally Render AddTransactionForm */}
+        {showForm && (
+          <div className="add-transaction-form">
+            <AddTransactionForm />
+          </div>
+        )}
+
         <ul className="transactions-list">
-          {transactions.map((transaction) => (
+          {filteredTransactions.map((transaction) => (
             <li key={transaction._id}>
-              <span>
-                {transaction.description} ({transaction.category}) -{" "}
-                {formatAmount(transaction.amount)} -{" "}
-                {formatDate(transaction.date)}
-              </span>
+              <span>{transaction.description}</span>
+              <span>£{transaction.amount.toFixed(2)}</span>
+              <span>{new Date(transaction.date).toLocaleDateString()}</span>
               <button
-                className="remove-button"
                 onClick={() => removeTransaction(transaction._id)}
-                title="Remove transaction"
+                className="remove-button"
               >
-                <FontAwesomeIcon icon={faTrash} />
+                🗑️
               </button>
             </li>
           ))}

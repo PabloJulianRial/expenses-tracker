@@ -1,7 +1,10 @@
-// src/pages/Summary/Summary.scss
+@import "../../styles/_variables.scss";
 
 .summary-container {
   padding: 15px;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .category-list {
@@ -12,28 +15,38 @@
 .category-sum-item {
   margin: 10px 0;
   padding: 10px;
-  background-color: #fff7fc;
+  background-color: #e4b7e5; /* Same as dashboard button background */
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+
+  &:hover {
+    background-color: #9a48d0; /* Same hover effect as dashboard buttons */
+  }
 }
 
 .category-sum-item a {
   text-decoration: none;
-  color: #63458a;
+  color: #63458a; /* Same as dashboard button text color */
   font-weight: bold;
   flex: 1;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .category-name {
   font-size: 1.1rem;
+  color: #63458a; /* Ensure consistency with dashboard links */
 }
 
 .category-total {
   font-size: 1rem;
   color: #9a48d0;
+}
+
+.category-sum-item a:hover {
+  color: #fff; /* Change text color on hover */
 }

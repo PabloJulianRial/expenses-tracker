@@ -76,3 +76,15 @@
 .dark-theme button:hover {
   background-color: #b288c0;
 }
+.settings-container,
+.summary-container,
+.dashboard-container {
+  padding-top: 60px;
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}

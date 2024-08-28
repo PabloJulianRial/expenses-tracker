@@ -1,8 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "./Navbar.scss";
 
 const Navbar: React.FC = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/"); // Redirect to the landing page after logging out
+  };
+
   return (
     <nav className="navbar">
       <ul className="navbar-list">
@@ -12,24 +21,14 @@ const Navbar: React.FC = () => {
           </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/transactions" className="navbar-link">
-            Transactions
-          </Link>
-        </li>
-        <li className="navbar-item">
-          <Link to="/analytics" className="navbar-link">
-            Analytics
-          </Link>
-        </li>
-        <li className="navbar-item">
-          <Link to="/summary" className="navbar-link">
-            Summary
-          </Link>{" "}
-        </li>
-        <li className="navbar-item">
           <Link to="/settings" className="navbar-link">
             Settings
           </Link>
+        </li>
+        <li className="navbar-item">
+          <button className="navbar-link logout-button" onClick={handleLogout}>
+            Log Out
+          </button>
         </li>
       </ul>
     </nav>

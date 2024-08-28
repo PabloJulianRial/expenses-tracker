@@ -1,9 +1,4 @@
-$color-primary: #b288c0;
-$color-secondary: #9a48d0;
-$color-light: #e4b7e5;
-$color-dark: #63458a;
-$color-white: #fff7fc;
-$color-black: #0a070d;
+@import "./../../styles/variables";
 
 .transactions-container {
   background-color: $color-white;
@@ -24,6 +19,35 @@ $color-black: #0a070d;
   color: $color-dark;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.search-input {
+  width: 94%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid $color-primary;
+  background-color: $color-light;
+  color: $color-dark;
+  font-size: 1rem;
+}
+
+.add-transaction-button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: $color-secondary;
+  color: $color-white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+  border: none;
+
+  &:hover {
+    background-color: $color-dark;
+  }
 }
 
 .add-transaction-form {

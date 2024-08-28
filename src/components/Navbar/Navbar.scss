@@ -1,9 +1,13 @@
-// src/components/Navbar/Navbar.scss
-
 .navbar {
   background-color: #63458a;
   padding: 10px 15px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure navbar takes the full width */
+  margin: 0; /* Remove any margins */
+  position: fixed; /* Fix the position at the top */
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .navbar-list {
@@ -11,23 +15,29 @@
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around; /* Space out the items evenly */
   align-items: center;
 }
 
 .navbar-item {
-  flex: 1; /* Ensure each item takes equal space */
+  flex: 1;
   text-align: center;
 }
 
-.navbar-link {
+.navbar-link,
+.logout-button {
   color: #fff7fc;
   text-decoration: none;
-  font-size: 14px; /* Smaller font size for mobile */
+  font-size: 14px;
   font-weight: bold;
   padding: 8px 10px;
   border-radius: 5px;
   display: block;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: center;
 
   &:hover {
     background-color: #9a48d0;
