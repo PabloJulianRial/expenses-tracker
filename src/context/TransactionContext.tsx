@@ -71,7 +71,7 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
     if (!currentUser) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/transactions", {
+      const response = await fetch(`${backendUrl}/api/transactions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -102,15 +102,12 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
     if (!currentUser) return;
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/transactions/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${await currentUser.getIdToken()}`,
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/api/transactions/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${await currentUser.getIdToken()}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Failed to remove transaction");
