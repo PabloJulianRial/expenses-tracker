@@ -29,6 +29,8 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
   const { currentUser } = useAuth();
   const [balance, setBalance] = useState<number>(0);
 
+  console.log("Backend URL in production:", process.env.VITE_BACKEND_URL);
+
   const backendUrl = process.env.VITE_BACKEND_URL || "http://localhost:5000";
 
   useEffect(() => {
