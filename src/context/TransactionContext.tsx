@@ -29,12 +29,15 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
   const { currentUser } = useAuth();
   const [balance, setBalance] = useState<number>(0);
 
+  const backendUrl =
+    process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+
   useEffect(() => {
     const fetchTransactions = async () => {
       if (!currentUser) return;
 
       try {
-        const response = await fetch("http://localhost:5000/api/transactions", {
+        const response = await fetch(`${backendUrl}/api/transactions`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${await currentUser.getIdToken()}`,
