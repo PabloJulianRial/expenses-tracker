@@ -29,8 +29,7 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
   const { currentUser } = useAuth();
   const [balance, setBalance] = useState<number>(0);
 
-  const backendUrl =
-    process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+  const backendUrl = process.env.VITE_BACKEND_URL || "http://localhost:5000";
 
   useEffect(() => {
     const fetchTransactions = async () => {
