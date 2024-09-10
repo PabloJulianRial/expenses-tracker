@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTransactionContext } from "../../context/TransactionContext";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Summary.scss";
+import BalanceDisplay from "../../components/BalanceDisplay/BalanceDisplay";
 
 const Summary: React.FC = () => {
   const { transactions } = useTransactionContext();
@@ -22,6 +23,7 @@ const Summary: React.FC = () => {
   return (
     <div className="summary-container">
       <Navbar />
+      <BalanceDisplay />
       <h2>Summary</h2>
       <ul className="category-list">
         {Object.entries(categoryTotals).map(([category, total]) => (

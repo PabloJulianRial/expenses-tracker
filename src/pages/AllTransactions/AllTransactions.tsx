@@ -3,6 +3,7 @@ import { useTransactionContext } from "../../context/TransactionContext";
 import AddTransactionForm from "../../components/AddTransactionForm/AddTransactionForm";
 import Navbar from "../../components/Navbar/Navbar";
 import "./AllTransactions.scss";
+import BalanceDisplay from "../../components/BalanceDisplay/BalanceDisplay";
 
 const AllTransactions: React.FC = () => {
   const { transactions, removeTransaction } = useTransactionContext();
@@ -20,6 +21,7 @@ const AllTransactions: React.FC = () => {
   return (
     <div>
       <Navbar />
+      <BalanceDisplay />
       <div className="transactions-container">
         <h2 className="balance">All Transactions</h2>
 

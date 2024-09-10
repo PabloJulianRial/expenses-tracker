@@ -1,3 +1,5 @@
+// src/pages/Settings/Settings.tsx
+
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { updatePassword } from "firebase/auth";
@@ -6,8 +8,9 @@ import "./Settings.scss";
 
 const Settings: React.FC = () => {
   const { currentUser, logout } = useAuth();
-  const [currency, setCurrency] = useState("£");
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(
+    document.body.classList.contains("dark-theme")
+  );
   const [newPassword, setNewPassword] = useState("");
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
@@ -26,14 +29,6 @@ const Settings: React.FC = () => {
       console.error("Error updating password:", error);
       setPasswordError("Failed to update password. Please try again.");
     }
-  };
-
-  const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurrency(e.target.value);
-  };
-
-  const handleLogout = () => {
-    logout();
   };
 
   const toggleDarkTheme = () => {
@@ -60,16 +55,6 @@ const Settings: React.FC = () => {
       </div>
 
       <div className="settings-section">
-        <h3>Change Currency</h3>
-        <select value={currency} onChange={handleCurrencyChange}>
-          <option value="£">GBP (£)</option>
-          <option value="$">USD ($)</option>
-          <option value="€">EUR (€)</option>
-          <option value="¥">JPY (¥)</option>
-        </select>
-      </div>
-
-      <div className="settings-section">
         <h3>Dark Theme</h3>
         <label>
           <input
@@ -83,7 +68,7 @@ const Settings: React.FC = () => {
 
       <div className="settings-section">
         <h3>Logout</h3>
-        <button onClick={handleLogout}>Log Out</button>
+        <button onClick={logout}>Log Out</button>
       </div>
     </div>
   );

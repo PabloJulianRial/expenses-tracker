@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useTransactionContext } from "../../context/TransactionContext";
 import Navbar from "../../components/Navbar/Navbar";
 import "./CategoryOverview.scss";
+import BalanceDisplay from "../../components/BalanceDisplay/BalanceDisplay";
 
 const CategoryOverview: React.FC = () => {
   const { category } = useParams<{ category: string }>();
@@ -15,6 +16,7 @@ const CategoryOverview: React.FC = () => {
   return (
     <div className="category-overview-container">
       <Navbar />
+      <BalanceDisplay />
       <h2>{category} Transactions</h2>
       <ul className="transaction-cat-list">
         {filteredTransactions.map((transaction) => (

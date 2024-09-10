@@ -5,6 +5,7 @@ import { useTransactionContext } from "../../context/TransactionContext";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Analytics.scss";
 import "chart.js/auto";
+import BalanceDisplay from "../../components/BalanceDisplay/BalanceDisplay";
 
 const Analytics: React.FC = () => {
   const { transactions } = useTransactionContext();
@@ -91,6 +92,7 @@ const Analytics: React.FC = () => {
   return (
     <div className="analytics-container">
       <Navbar />
+      <BalanceDisplay />
       <h2>Analytics</h2>
       <div>
         <h3>Expenses by Category</h3>

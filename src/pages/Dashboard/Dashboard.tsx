@@ -2,11 +2,13 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Dashboard.scss";
 import { Link } from "react-router-dom";
+import BalanceDisplay from "../../components/BalanceDisplay/BalanceDisplay";
 
 const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-container">
       <Navbar />
+      <BalanceDisplay />
       <div className="dashboard-content">
         <h1>Dashboard</h1>
         <ul>

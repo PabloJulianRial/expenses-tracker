@@ -1,29 +1,6 @@
 @import "_variables.scss";
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-}
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-color: $color-white;
-}
-li {
-  list-style: none;
-}
-#root {
-  height: 100vh;
-  width: 100vw;
-}
-
+// Global styles
 * {
   margin: 0;
   padding: 0;
@@ -40,4 +17,64 @@ body {
 body {
   font-family: "Arial", sans-serif;
   background-color: $color-white;
+  color: $color-black;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Dark theme styles */
+body.dark-theme {
+  background-color: $color-black;
+  color: #fff;
+}
+
+/* Container styles */
+.dark-theme .container,
+.dark-theme .dashboard-container,
+.dark-theme .transactions-container,
+.dark-theme .settings-container,
+.dark-theme .analytics-container,
+.dark-theme .summary-container,
+.dark-theme .category-overview-container {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Form element styles */
+.dark-theme input,
+.dark-theme select,
+.dark-theme button {
+  background-color: #555;
+  color: #fff;
+  border: 1px solid #777;
+}
+
+/* Navbar */
+.dark-theme .navbar {
+  background-color: #222;
+}
+
+/* Other elements */
+.dark-theme .balance-display {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-theme .transactions-list li,
+.dark-theme .category-sum-item,
+.dark-theme .transaction-cat-item {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-theme button {
+  background-color: #666;
+  color: #fff;
+}
+
+.dark-theme button:hover {
+  background-color: #888;
 }
