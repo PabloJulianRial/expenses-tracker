@@ -5,7 +5,6 @@ import { useTransactionContext } from "../../context/TransactionContext";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Analytics.scss";
 import "chart.js/auto";
-import BalanceDisplay from "../../components/BalanceDisplay/BalanceDisplay";
 
 const Analytics: React.FC = () => {
   const { transactions } = useTransactionContext();
@@ -32,28 +31,27 @@ const Analytics: React.FC = () => {
     ],
   });
 
-  useEffect(() => {
-    const categories = transactions.reduce(
+  const [selectedMonth, setSelectedMonth] = useState<string>("All");
+
+  const updateCategoryData = (month: string) => {
+    const filteredTransactions =
+      month === "All"
+        ? transactions
+        : transactions.filter(
+            (transaction) =>
+              new Date(transaction.date).toLocaleString("default", {
+                month: "long",
+                year: "numeric",
+              }) === month
+          );
+
+    const categories = filteredTransactions.reduce(
       (acc: Record<string, number>, transaction) => {
         const category = transaction.category;
         if (!acc[category]) {
           acc[category] = 0;
         }
         acc[category] += transaction.amount;
-        return acc;
-      },
-      {}
-    );
-
-    const months = transactions.reduce(
-      (acc: Record<string, number>, transaction) => {
-        const month = new Date(transaction.date).toLocaleString("default", {
-          month: "long",
-        });
-        if (!acc[month]) {
-          acc[month] = 0;
-        }
-        acc[month] += transaction.amount;
         return acc;
       },
       {}
@@ -76,6 +74,23 @@ const Analytics: React.FC = () => {
         },
       ],
     });
+  };
+
+  useEffect(() => {
+    const months = transactions.reduce(
+      (acc: Record<string, number>, transaction) => {
+        const month = new Date(transaction.date).toLocaleString("default", {
+          month: "long",
+          year: "numeric",
+        });
+        if (!acc[month]) {
+          acc[month] = 0;
+        }
+        acc[month] += transaction.amount;
+        return acc;
+      },
+      {}
+    );
 
     setMonthlyData({
       labels: Object.keys(months),
@@ -87,17 +102,41 @@ const Analytics: React.FC = () => {
         },
       ],
     });
+
+    updateCategoryData("All");
   }, [transactions]);
+
+  const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const month = event.target.value;
+    setSelectedMonth(month);
+    updateCategoryData(month);
+  };
 
   return (
     <div className="analytics-container">
       <Navbar />
-      <BalanceDisplay />
       <h2>Analytics</h2>
+
       <div>
         <h3>Expenses by Category</h3>
+        <div className="chart-controls">
+          <label htmlFor="month-select">Select Month:</label>
+          <select
+            id="month-select"
+            value={selectedMonth}
+            onChange={handleMonthChange}
+          >
+            <option value="All">All</option>
+            {monthlyData.labels?.map((month, index) => (
+              <option key={index} value={String(month)}>
+                {String(month)}
+              </option>
+            ))}
+          </select>
+        </div>
         <Pie data={categoryData} />
       </div>
+
       <div style={{ marginTop: "50px" }}>
         <h3>Monthly Expenses</h3>
         <Bar data={monthlyData} />

@@ -7,12 +7,14 @@
   box-sizing: border-box;
 }
 
-.category-list {
+.category-list,
+.monthly-list {
   list-style-type: none;
   padding: 0;
 }
 
-.category-sum-item {
+.category-sum-item,
+.monthly-sum-item {
   margin: 10px 0;
   padding: 10px;
   background-color: #e4b7e5;
@@ -25,28 +27,64 @@
   &:hover {
     background-color: #9a48d0;
   }
+
+  a {
+    text-decoration: none;
+    color: #63458a;
+    font-weight: bold;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* Prevent visited links from changing style */
+    &:visited {
+      color: #63458a;
+    }
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .category-name,
+  .month-name {
+    font-size: 1.1rem;
+    color: #63458a;
+  }
+
+  .category-total,
+  .month-total {
+    font-size: 1rem;
+    color: #9a48d0;
+  }
 }
 
-.category-sum-item a {
-  text-decoration: none;
-  color: #63458a;
-  font-weight: bold;
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.category-name {
-  font-size: 1.1rem;
-  color: #63458a;
-}
-
-.category-total {
-  font-size: 1rem;
-  color: #9a48d0;
-}
-
-.category-sum-item a:hover {
+body.dark-theme .summary-container {
+  background-color: #333;
   color: #fff;
+}
+
+body.dark-theme .category-sum-item,
+body.dark-theme .monthly-sum-item {
+  background-color: #444;
+  color: #fff;
+
+  a {
+    color: #fff;
+
+    &:visited {
+      color: #fff;
+    }
+
+    &:hover {
+      background-color: #9a48d0;
+      color: #fff;
+    }
+  }
+
+  .category-total,
+  .month-total {
+    color: #9a48d0;
+  }
 }

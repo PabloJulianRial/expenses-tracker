@@ -1,9 +1,15 @@
 @import "../../styles/_variables.scss";
+
 .dashboard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: calc(100vh + 52px);
+
+  body.dark-theme & {
+    background-color: #333;
+    color: #fff;
+  }
 }
 
 .dashboard-content {
@@ -15,6 +21,11 @@
   max-width: 500px;
   text-align: center;
   height: 100vh;
+
+  body.dark-theme & {
+    background-color: #444;
+    color: #fff;
+  }
 }
 
 h1 {
@@ -22,10 +33,9 @@ h1 {
   margin-bottom: 15px;
 }
 
-.dashboard-links ul {
+ul {
   padding: 0;
-  list-style: none;
-  margin: 0;
+  list-style-type: none;
 }
 
 .dashboard-link {
@@ -43,5 +53,14 @@ h1 {
   &:hover {
     background-color: #9a48d0;
     color: #fff;
+  }
+
+  body.dark-theme & {
+    background-color: #555;
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: #888;
   }
 }

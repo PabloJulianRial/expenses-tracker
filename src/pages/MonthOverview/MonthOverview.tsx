@@ -2,19 +2,23 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTransactionContext } from "../../context/TransactionContext";
 import Navbar from "../../components/Navbar/Navbar";
-import "./CategoryOverview.scss";
+import "./MonthOverview.scss";
 import BalanceDisplay from "../../components/BalanceDisplay/BalanceDisplay";
 
-const CategoryOverview: React.FC = () => {
-  const { category } = useParams<{ category: string }>();
+const MonthOverview: React.FC = () => {
+  const { month } = useParams<{ month: string }>();
   const { transactions } = useTransactionContext();
   const navigate = useNavigate();
 
   const filteredTransactions = transactions.filter(
-    (transaction) => transaction.category === category
+    (transaction) =>
+      new Date(transaction.date).toLocaleString("default", {
+        month: "long",
+        year: "numeric",
+      }) === month
   );
 
-  const categoryTotal = filteredTransactions.reduce(
+  const monthTotal = filteredTransactions.reduce(
     (acc, transaction) => acc + transaction.amount,
     0
   );
@@ -23,18 +27,22 @@ const CategoryOverview: React.FC = () => {
     navigate("/summary");
   };
 
+  const formattedMonth = month
+    ? month.charAt(0).toUpperCase() + month.slice(1)
+    : "";
+
   return (
-    <div className="category-overview-container">
+    <div className="month-overview-container">
       <Navbar />
       <BalanceDisplay />
-      <h2>{category} Transactions</h2>
+      <h2>{formattedMonth} Transactions</h2>
       <h3>
-        Total for {category}: £{categoryTotal.toFixed(2)}
+        Total for {formattedMonth}: £{monthTotal.toFixed(2)}
       </h3>
 
-      <ul className="transaction-cat-list">
+      <ul className="transaction-month-list">
         {filteredTransactions.map((transaction) => (
-          <li key={transaction._id} className="transaction-cat-item">
+          <li key={transaction._id} className="transaction-month-item">
             <span>{transaction.description}</span>
             <span>£{transaction.amount.toFixed(2)}</span>
             <span>{new Date(transaction.date).toLocaleDateString()}</span>
@@ -49,4 +57,4 @@ const CategoryOverview: React.FC = () => {
   );
 };
 
-export default CategoryOverview;
+export default MonthOverview;

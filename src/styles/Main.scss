@@ -1,6 +1,5 @@
 @import "_variables.scss";
 
-// Global styles
 * {
   margin: 0;
   padding: 0;
@@ -25,13 +24,11 @@ body {
   width: 100vw;
 }
 
-/* Dark theme styles */
 body.dark-theme {
   background-color: $color-black;
   color: #fff;
 }
 
-/* Container styles */
 .dark-theme .container,
 .dark-theme .dashboard-container,
 .dark-theme .transactions-container,
@@ -43,7 +40,6 @@ body.dark-theme {
   color: #fff;
 }
 
-/* Form element styles */
 .dark-theme input,
 .dark-theme select,
 .dark-theme button {
@@ -52,12 +48,10 @@ body.dark-theme {
   border: 1px solid #777;
 }
 
-/* Navbar */
 .dark-theme .navbar {
   background-color: #222;
 }
 
-/* Other elements */
 .dark-theme .balance-display {
   background-color: #444;
   color: #fff;

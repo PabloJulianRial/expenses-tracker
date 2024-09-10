@@ -11,11 +11,37 @@
   align-items: center;
   justify-content: flex-start;
   z-index: 0;
+
+  body.dark-theme & {
+    background-color: #333;
+    color: #fff;
+  }
 }
 
 .analytics-container h2,
 .analytics-container h3 {
   color: $color-dark;
+
+  body.dark-theme & {
+    color: #fff;
+  }
+}
+
+.chart-controls {
+  margin-bottom: 20px;
+
+  label {
+    margin-right: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid $color-dark;
+    font-size: 1rem;
+  }
 }
 
 .chart-container {

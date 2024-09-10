@@ -1,4 +1,5 @@
 @import "../../styles/_variables.scss";
+
 .category-overview-container {
   padding: 15px;
 }
@@ -11,7 +12,7 @@
 .transaction-cat-item {
   margin: 10px 0;
   padding: 10px;
-  background-color: #fff7fc;
+  background-color: #e4b7e5;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
@@ -19,6 +20,19 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.transaction-item span {
+.back-button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #63458a;
+  color: white;
+  border: none;
+  cursor: pointer;
   font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #9a48d0;
+  }
 }

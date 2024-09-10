@@ -1,5 +1,3 @@
-// src/pages/Settings/Settings.tsx
-
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { updatePassword } from "firebase/auth";

@@ -21,8 +21,9 @@ const AllTransactions: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <BalanceDisplay />
+
       <div className="transactions-container">
+        <BalanceDisplay />
         <h2 className="balance">All Transactions</h2>
 
         <input

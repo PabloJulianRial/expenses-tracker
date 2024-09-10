@@ -5,19 +5,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const categories = [
-  "groceries",
-  "entertainment",
-  "travel",
-  "accommodation",
-  "bills",
-  "finances",
-  "eating out",
-  "expenses",
-  "gifts",
-  "holidays",
-  "shopping",
-  "personal care",
-  "general",
+  "Groceries",
+  "Entertainment",
+  "Travel",
+  "Bills",
+  "Finances",
+  "Eating out",
+  "Expenses",
+  "Gifts",
+  "Holidays",
+  "Shopping",
+  "Personal care",
+  "General",
 ];
 
 const AddTransactionForm: React.FC = () => {
