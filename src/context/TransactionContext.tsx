@@ -29,15 +29,11 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
   const { currentUser } = useAuth();
   const [balance, setBalance] = useState<number>(0);
 
-  const backendUrl = process.env.VITE_BACKEND_URL;
-  if (!backendUrl) {
-    console.error("Backend URL is not defined.");
-  } else {
-    console.log("Backend URL in production:", backendUrl);
-  }
+  const backendUrl =
+    import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+  console.log("Backend URL in production:", import.meta.env.VITE_BACKEND_URL);
 
   useEffect(() => {
-    console.log("Backend URL in production:", process.env.VITE_BACKEND_URL);
     const fetchTransactions = async () => {
       if (!currentUser) return;
 
