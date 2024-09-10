@@ -30,6 +30,11 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
   const [balance, setBalance] = useState<number>(0);
 
   const backendUrl = process.env.VITE_BACKEND_URL;
+  if (!backendUrl) {
+    console.error("Backend URL is not defined.");
+  } else {
+    console.log("Backend URL in production:", backendUrl);
+  }
 
   useEffect(() => {
     console.log("Backend URL in production:", process.env.VITE_BACKEND_URL);
